@@ -21,3 +21,583 @@
       --text: #252525;
       --secondary-text: #666666;
       --accent: #2563eb;
+      --accent-dark: #1d4ed8;
+      --border: #e5e7eb;
+      --card-background: #f8fafc;
+      --max-width: 950px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--text);
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--accent-dark);
+      text-decoration: underline;
+    }
+
+    .container {
+      width: min(var(--max-width), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    /* Navigation */
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.95);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-content {
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .nav-name {
+      color: var(--text);
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .nav-name:hover {
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: var(--secondary-text);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* Profile */
+
+    .profile {
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      gap: 42px;
+      align-items: center;
+      padding: 72px 0 42px;
+    }
+
+    .profile-photo {
+      width: 190px;
+      height: 190px;
+      border: 4px solid white;
+      border-radius: 50%;
+      box-shadow: 0 5px 22px rgba(0, 0, 0, 0.14);
+      object-fit: cover;
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: 42px;
+      line-height: 1.2;
+    }
+
+    .headline {
+      margin: 0 0 18px;
+      color: var(--secondary-text);
+      font-size: 19px;
+    }
+
+    .profile-description {
+      max-width: 650px;
+      margin: 0 0 20px;
+    }
+
+    .profile-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 600;
+      transition: 0.2s ease;
+    }
+
+    .button:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+
+    .button-primary {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: white;
+    }
+
+    .button-primary:hover {
+      background: var(--accent-dark);
+      color: white;
+    }
+
+    /* General sections */
+
+    section {
+      padding: 32px 0;
+      scroll-margin-top: 70px;
+    }
+
+    h2 {
+      margin: 0 0 22px;
+      padding-bottom: 9px;
+      border-bottom: 1px solid var(--border);
+      font-size: 27px;
+    }
+
+    h3 {
+      margin-top: 0;
+    }
+
+    .muted {
+      color: var(--secondary-text);
+    }
+
+    /* News */
+
+    .news-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .news-list li {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .news-date {
+      color: var(--secondary-text);
+      font-weight: 600;
+    }
+
+    /* Publications */
+
+    .publication {
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .publication-image {
+      width: 100%;
+      height: 125px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--card-background);
+      object-fit: cover;
+    }
+
+    .publication-title {
+      margin: 0 0 5px;
+      font-size: 18px;
+      line-height: 1.45;
+    }
+
+    .publication-authors,
+    .publication-venue {
+      margin: 3px 0;
+    }
+
+    .publication-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .publication-links a {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    /* Experience and education */
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 30px;
+      margin-bottom: 25px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--card-background);
+    }
+
+    .timeline-item h3 {
+      margin-bottom: 4px;
+      font-size: 18px;
+    }
+
+    .timeline-item p {
+      margin: 3px 0;
+    }
+
+    .timeline-date {
+      color: var(--secondary-text);
+      white-space: nowrap;
+    }
+
+    /* Footer */
+
+    footer {
+      margin-top: 40px;
+      padding: 28px 0;
+      border-top: 1px solid var(--border);
+      color: var(--secondary-text);
+      text-align: center;
+      font-size: 14px;
+    }
+
+    /* Mobile layout */
+
+    @media (max-width: 700px) {
+      .nav-content {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+        padding: 12px 0;
+      }
+
+      .nav-links {
+        gap: 12px;
+      }
+
+      .profile {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding-top: 45px;
+        text-align: center;
+      }
+
+      .profile-photo {
+        margin: 0 auto;
+      }
+
+      .profile-links {
+        justify-content: center;
+      }
+
+      h1 {
+        font-size: 35px;
+      }
+
+      .publication {
+        grid-template-columns: 1fr;
+      }
+
+      .publication-image {
+        max-width: 320px;
+        height: auto;
+        aspect-ratio: 3 / 2;
+      }
+
+      .news-list li {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 5px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+
+  <nav>
+    <div class="container nav-content">
+      #Duy Cao</a>
+
+      <div class="nav-links">
+        #aboutAbout</a>
+        #newsNews</a>
+        #publicationsPublications</a>
+        #experienceExperience</a>
+        #educationEducation</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <!-- Profile -->
+
+    <header class="profile" id="about">
+      assets/profile.jpg
+
+      <div>
+        <h1>Duy Cao</h1>
+
+        <p class="headline">
+          AI Resident · Generative Models · Computer Vision
+        </p>
+
+        <p class="profile-description">
+          I am an AI researcher interested in generative models,
+          diffusion models, reinforcement learning, and 3D generation.
+          My research focuses on developing reliable and scalable methods
+          for visual content generation.
+        </p>
+
+        <div class="profile-links">
+          assets/cv.pdf
+            CV
+          </a>
+
+          https://scholar.google.com/
+            Google Scholar
+          </a>
+
+          https://github.com/caoduycp03
+            GitHub
+          </a>
+
+          https://www.linkedin.com/
+            LinkedIn
+          </a>
+
+          your-email@example.com
+            Email
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- News -->
+
+    <section id="news">
+      <h2>News</h2>
+
+      <ul class="news-list">
+        <li>
+          <span class="news-date">Oct. 2026</span>
+          <span>
+            Our paper is currently in the ICLR rebuttal stage.
+          </span>
+        </li>
+
+        <li>
+          <span class="news-date">July 2026</span>
+          <span>
+            Our first-author paper was accepted to ECCV.
+          </span>
+        </li>
+
+        <li>
+          <span class="news-date">2026</span>
+          <span>
+            I joined [Organization] as an AI Resident.
+          </span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Research interests -->
+
+    <section id="research">
+      <h2>Research Interests</h2>
+
+      <p>
+        My research interests include generative AI, diffusion models,
+        text-to-3D generation, reinforcement learning, computer vision,
+        and efficient model training.
+      </p>
+    </section>
+
+    <!-- Publications -->
+
+    <section id="publications">
+      <h2>Selected Publications</h2>
+
+      <article class="publication">
+        assets/paper1.jpg
+
+        <div>
+          <h3 class="publication-title">
+            Your ICLR Paper Title
+          </h3>
+
+          <p class="publication-authors">
+            <strong>Duy Cao</strong>,
+            Coauthor One,
+            Coauthor Two
+          </p>
+
+          <p class="publication-venue">
+            <em>Under review at ICLR, 2027</em>
+          </p>
+
+          <div class="publication-links">
+            #Paper</a>
+            #Project</a>
+            #Code</a>
+            #arXiv</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="publication">
+        assets/paper2.jpg
+
+        <div>
+          <h3 class="publication-title">
+            Your ECCV Paper Title
+          </h3>
+
+          <p class="publication-authors">
+            <strong>Duy Cao</strong>,
+            Coauthor One,
+            Coauthor Two
+          </p>
+
+          <p class="publication-venue">
+            <em>European Conference on Computer Vision, 2026</em>
+          </p>
+
+          <div class="publication-links">
+            #Paper</a>
+            #Project</a>
+            #Code</a>
+            #arXiv</a>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- Experience -->
+
+    <section id="experience">
+      <h2>Experience</h2>
+
+      <div class="timeline-item">
+        <div>
+          <h3>AI Resident</h3>
+          <p><strong>[Organization name]</strong></p>
+          <p class="muted">
+            Research on generative models and 3D content generation.
+          </p>
+        </div>
+
+        <div class="timeline-date">
+          2026–Present
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div>
+          <h3>Research Intern</h3>
+          <p><strong>[Organization or university]</strong></p>
+          <p class="muted">
+            Briefly describe your research project and contributions.
+          </p>
+        </div>
+
+        <div class="timeline-date">
+          2025–2026
+        </div>
+      </div>
+    </section>
+
+    <!-- Education -->
+
+    <section id="education">
+      <h2>Education</h2>
+
+      <div class="timeline-item">
+        <div>
+          <h3>[Degree name]</h3>
+          <p><strong>[University name]</strong></p>
+          <p class="muted">
+            Relevant coursework, thesis, distinction, or GPA.
+          </p>
+        </div>
+
+        <div class="timeline-date">
+          2022–2026
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+
+    <section id="contact">
+      <h2>Contact</h2>
+
+      <p>
+        The best way to reach me is by email at
+        your-email@example.com
+          your-email@example.com
+        </a>.
+      </p>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2026 Duy Cao. Hosted with GitHub Pages.
+    </div>
+  </footer>
+
+</body>
+</html>
