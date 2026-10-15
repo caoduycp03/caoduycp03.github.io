@@ -2,602 +2,311 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <meta
-    name="description"
-    content="Duy Cao - AI researcher working on generative models, computer vision, and 3D generation."
-  >
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Duy Cao - AI researcher working on generative models, computer vision, and 3D generation.">
   <title>Duy Cao</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Arima:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --background: #ffffff;
-      --text: #252525;
-      --secondary-text: #666666;
-      --accent: #2563eb;
-      --accent-dark: #1d4ed8;
-      --border: #e5e7eb;
-      --card-background: #f8fafc;
-      --max-width: 950px;
+      --text: #222222;
+      --muted: #666666;
+      --accent: #225ea8;
+      --border: #e5e5e5;
+      --soft-background: #f7f8fa;
+      --max-width: 920px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
       background: var(--background);
       color: var(--text);
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Helvetica,
-        Arial,
-        sans-serif;
+      font-family: "Arima", Georgia, serif;
       font-size: 16px;
-      line-height: 1.7;
+      line-height: 1.6;
     }
 
-    a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    a:hover {
-      color: var(--accent-dark);
-      text-decoration: underline;
-    }
-
-    .container {
-      width: min(var(--max-width), calc(100% - 40px));
-      margin: 0 auto;
-    }
-
-    /* Navigation */
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img { display: block; max-width: 100%; }
+    .container { width: min(var(--max-width), calc(100% - 40px)); margin: 0 auto; }
 
     nav {
       position: sticky;
       top: 0;
-      z-index: 100;
-      background: rgba(255, 255, 255, 0.95);
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.96);
       border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(10px);
     }
 
     .nav-content {
-      min-height: 64px;
+      min-height: 62px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 24px;
     }
 
-    .nav-name {
+    .name {
       color: var(--text);
       font-size: 18px;
       font-weight: 700;
     }
 
-    .nav-name:hover {
-      text-decoration: none;
-    }
-
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-
-    .nav-links a {
-      color: var(--secondary-text);
-      font-size: 14px;
-      font-weight: 500;
-    }
-
-    .nav-links a:hover {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    /* Profile */
+    .name:hover { text-decoration: none; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 22px; }
+    .nav-links a { color: var(--muted); font-size: 14px; font-weight: 500; }
+    .nav-links a:hover { color: var(--accent); text-decoration: none; }
 
     .profile {
       display: grid;
-      grid-template-columns: 190px 1fr;
+      grid-template-columns: 180px 1fr;
       gap: 42px;
       align-items: center;
-      padding: 72px 0 42px;
+      padding: 68px 0 48px;
     }
 
     .profile-photo {
-      width: 190px;
-      height: 190px;
-      border: 4px solid white;
-      border-radius: 50%;
-      box-shadow: 0 5px 22px rgba(0, 0, 0, 0.14);
+      width: 180px;
+      height: 180px;
+      border-radius: 8px;
       object-fit: cover;
+      background: var(--soft-background);
     }
 
     h1 {
-      margin: 0 0 6px;
+      margin: 0 0 5px;
+      font-family: "Arima", Georgia, serif;
       font-size: 42px;
       line-height: 1.2;
-    }
-
-    .headline {
-      margin: 0 0 18px;
-      color: var(--secondary-text);
-      font-size: 19px;
-    }
-
-    .profile-description {
-      max-width: 650px;
-      margin: 0 0 20px;
-    }
-
-    .profile-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .button {
-      display: inline-block;
-      padding: 8px 14px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text);
-      font-size: 14px;
       font-weight: 600;
-      transition: 0.2s ease;
     }
 
-    .button:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      text-decoration: none;
-      transform: translateY(-1px);
-    }
+    .role { margin: 0 0 16px; color: var(--muted); font-size: 18px; }
+    .bio { max-width: 650px; margin: 0 0 18px; }
+    .external-links { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 15px; }
 
-    .button-primary {
-      border-color: var(--accent);
-      background: var(--accent);
-      color: white;
-    }
-
-    .button-primary:hover {
-      background: var(--accent-dark);
-      color: white;
-    }
-
-    /* General sections */
-
-    section {
-      padding: 32px 0;
-      scroll-margin-top: 70px;
-    }
+    section { padding: 20px 0; scroll-margin-top: 75px; }
 
     h2 {
       margin: 0 0 22px;
-      padding-bottom: 9px;
+      padding-bottom: 8px;
       border-bottom: 1px solid var(--border);
+      font-family: "Arima", Georgia, serif;
       font-size: 27px;
-    }
-
-    h3 {
-      margin-top: 0;
-    }
-
-    .muted {
-      color: var(--secondary-text);
-    }
-
-    /* News */
-
-    .news-list {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .news-list li {
-      display: grid;
-      grid-template-columns: 110px 1fr;
-      gap: 16px;
-      margin-bottom: 12px;
-    }
-
-    .news-date {
-      color: var(--secondary-text);
       font-weight: 600;
     }
 
-    /* Publications */
+    .news-list { margin: 0; padding: 0; list-style: none; }
+    .news-list li { display: grid; grid-template-columns: 105px 1fr; gap: 18px; margin-bottom: 11px; }
+    .news-date { color: var(--muted); font-weight: 600; }
 
     .publication {
       display: grid;
       grid-template-columns: 190px 1fr;
-      gap: 24px;
-      margin-bottom: 32px;
+      gap: 25px;
+      margin-bottom: 34px;
     }
 
     .publication-image {
-      width: 100%;
-      height: 125px;
+      width: 190px;
+      height: 120px;
       border: 1px solid var(--border);
-      border-radius: 10px;
-      background: var(--card-background);
+      border-radius: 5px;
+      background: var(--soft-background);
       object-fit: cover;
     }
 
-    .publication-title {
-      margin: 0 0 5px;
-      font-size: 18px;
-      line-height: 1.45;
-    }
+    .publication h3 { margin: 0 0 5px; font-size: 18px; line-height: 1.45; }
+    .publication p { margin: 3px 0; }
+    .authors, .venue { color: var(--muted); }
+    .publication-links { margin-top: 7px; font-size: 14px; font-weight: 600; }
+    .publication-links a { margin-right: 15px; }
 
-    .publication-authors,
-    .publication-venue {
-      margin: 3px 0;
-    }
-
-    .publication-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 8px;
-    }
-
-    .publication-links a {
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    /* Experience and education */
-
-    .timeline-item {
+    .entry {
       display: grid;
       grid-template-columns: 1fr auto;
-      gap: 30px;
-      margin-bottom: 25px;
-      padding: 20px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: var(--card-background);
+      gap: 24px;
+      padding: 0 0 22px;
+      margin-bottom: 22px;
+      border-bottom: 1px solid var(--border);
     }
 
-    .timeline-item h3 {
-      margin-bottom: 4px;
-      font-size: 18px;
-    }
+    .entry:last-child { border-bottom: 0; }
+    .entry h3 { margin: 0 0 3px; font-size: 17px; }
+    .entry p { margin: 3px 0; color: var(--muted); }
+    .entry-date { color: var(--muted); white-space: nowrap; }
 
-    .timeline-item p {
-      margin: 3px 0;
-    }
+    .contact { padding-bottom: 65px; }
+    footer { padding: 25px 0; border-top: 1px solid var(--border); color: var(--muted); text-align: center; font-size: 14px; }
 
-    .timeline-date {
-      color: var(--secondary-text);
-      white-space: nowrap;
-    }
-
-    /* Footer */
-
-    footer {
-      margin-top: 40px;
-      padding: 28px 0;
-      border-top: 1px solid var(--border);
-      color: var(--secondary-text);
-      text-align: center;
-      font-size: 14px;
-    }
-
-    /* Mobile layout */
-
-    @media (max-width: 700px) {
-      .nav-content {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 8px;
-        padding: 12px 0;
-      }
-
-      .nav-links {
-        gap: 12px;
-      }
-
-      .profile {
-        grid-template-columns: 1fr;
-        gap: 24px;
-        padding-top: 45px;
-        text-align: center;
-      }
-
-      .profile-photo {
-        margin: 0 auto;
-      }
-
-      .profile-links {
-        justify-content: center;
-      }
-
-      h1 {
-        font-size: 35px;
-      }
-
-      .publication {
-        grid-template-columns: 1fr;
-      }
-
-      .publication-image {
-        max-width: 320px;
-        height: auto;
-        aspect-ratio: 3 / 2;
-      }
-
-      .news-list li {
-        grid-template-columns: 1fr;
-        gap: 0;
-      }
-
-      .timeline-item {
-        grid-template-columns: 1fr;
-        gap: 5px;
-      }
+    @media (max-width: 680px) {
+      .nav-content { align-items: flex-start; flex-direction: column; gap: 7px; padding: 11px 0; }
+      .nav-links { gap: 12px; }
+      .profile { grid-template-columns: 1fr; gap: 24px; padding-top: 45px; }
+      .profile-photo { width: 150px; height: 150px; }
+      h1 { font-size: 36px; }
+      .publication { grid-template-columns: 1fr; gap: 15px; }
+      .publication-image { width: min(100%, 330px); height: auto; aspect-ratio: 3 / 2; }
+      .news-list li { grid-template-columns: 1fr; gap: 0; margin-bottom: 17px; }
+      .entry { grid-template-columns: 1fr; gap: 3px; }
     }
   </style>
 </head>
-
 <body>
-
-  <!-- Navigation -->
-
   <nav>
     <div class="container nav-content">
-      #Duy Cao</a>
-
+      <a class="name" href="#about">Duy Cao</a>
       <div class="nav-links">
-        #aboutAbout</a>
-        #newsNews</a>
-        #publicationsPublications</a>
-        #experienceExperience</a>
-        #educationEducation</a>
+        <a href="#about">About</a>
+        <a href="#news">News</a>
+        <a href="#publications">Publications</a>
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
       </div>
     </div>
   </nav>
 
   <main class="container">
-
-    <!-- Profile -->
-
     <header class="profile" id="about">
-      assets/profile.jpg
-
+      <img class="profile-photo" src="assets/profile.jpg" alt="Portrait of Duy Cao">
       <div>
-        <h1>Duy Cao</h1>
-
-        <p class="headline">
-          AI Resident · Generative Models · Computer Vision
+        <h1>Duy Cao (aka Cao Duy) </h1>
+        <p class="role">Qualcomm Research Resident · 3D Generation and Understanding · Robotics </p>
+        <p class="bio">
+        I am an AI researcher interested in <strong> how machines can generate, understand, and interact with 3D worlds</strong>. 
+        My research explores diffusion models, multimodal language models, reinforcement learning, and Vision-Language-Action models. 
+        Ultimately, I hope to make 3D generation useful for both creative applications and embodied AI,  
+        from producing visually appealing 3D assets to creating simulation-ready content, while also bringing 3D knowledge into robot learning and developing more capable and efficient VLA models.
+        <br><br>
+        Since August 2024, I have been a Research Resident at
+        <a href="https://www.vinai.io/" target="_blank" rel="noopener noreferrer">
+          VinAI Research
+        </a>
+        and then
+        <a href="https://www.qualcomm.com/research/artificial-intelligence"
+          target="_blank"
+          rel="noopener noreferrer">
+          Qualcomm AI Research
+        </a>.
+        Under the supervision of
+        <a href="https://phongnhhn.info/" target="_blank" rel="noopener noreferrer">
+          Phong Nguyen
+        </a>
+        and in collaboration with
+        <a href="https://scholar.google.com/citations?user=FYZ5ODQAAAAJ" target="_blank" rel="noopener noreferrer">
+          Anh Tran
+        </a>,
+        I have worked on various topics in 3D. This research has resulted in two
+        publications on 3D generation:
+        <a href="https://arxiv.org/abs/2607.01803" target="_blank" rel="noopener noreferrer">
+          PixGS
+        </a>
+        and
+        <a href="NEXT3DGEN_URL" target="_blank" rel="noopener noreferrer">
+          Next3DGen
+        </a>.
         </p>
-
-        <p class="profile-description">
-          I am an AI researcher interested in generative models,
-          diffusion models, reinforcement learning, and 3D generation.
-          My research focuses on developing reliable and scalable methods
-          for visual content generation.
-        </p>
-
-        <div class="profile-links">
-          assets/cv.pdf
-            CV
-          </a>
-
-          https://scholar.google.com/
-            Google Scholar
-          </a>
-
-          https://github.com/caoduycp03
-            GitHub
-          </a>
-
-          https://www.linkedin.com/
-            LinkedIn
-          </a>
-
-          your-email@example.com
-            Email
-          </a>
+        <div class="external-links">
+          <a href="assets/cv.pdf" target="_blank">CV</a>
+          <a href="https://scholar.google.com/citations?user=UlraKiQAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
+          <a href="https://github.com/caoduycp03" target="_blank" rel="noopener">Github</a>
+          <a href="https://www.linkedin.com/in/caoduy03/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="mailto:caoduycp03@gmail.com">Email</a>
         </div>
       </div>
     </header>
 
-    <!-- News -->
-
     <section id="news">
       <h2>News</h2>
-
       <ul class="news-list">
-        <li>
-          <span class="news-date">Oct. 2026</span>
-          <span>
-            Our paper is currently in the ICLR rebuttal stage.
-          </span>
-        </li>
-
-        <li>
-          <span class="news-date">July 2026</span>
-          <span>
-            Our first-author paper was accepted to ECCV.
-          </span>
-        </li>
-
-        <li>
-          <span class="news-date">2026</span>
-          <span>
-            I joined [Organization] as an AI Resident.
-          </span>
-        </li>
+        <li><span class="news-date">Oct. 2026</span><span>The Next Step in 3D Generation Post-Training is in the ICLR 2027 rebuttal stage.</span></li>
+        <li><span class="news-date">June. 2026</span><span>PixGS: Pixel-Space Diffusion for Direct 3D Gaussian Splat Generation was accepted to ECCV 2026.</span></li>
+        <li><span class="news-date">March. 2025</span><span>I joined Qualcomm AI Research as an AI Research Resident.</span></li>
+        <li><span class="news-date">Aug. 2024</span><span>I joined VinAI Research as an AI Research Resident.</span></li>
       </ul>
     </section>
-
-    <!-- Research interests -->
-
-    <section id="research">
-      <h2>Research Interests</h2>
-
-      <p>
-        My research interests include generative AI, diffusion models,
-        text-to-3D generation, reinforcement learning, computer vision,
-        and efficient model training.
-      </p>
-    </section>
-
-    <!-- Publications -->
 
     <section id="publications">
       <h2>Selected Publications</h2>
 
       <article class="publication">
-        assets/paper1.jpg
-
+        <img class="publication-image" src="assets/Next3DGen.png" alt="Preview of the first publication">
         <div>
-          <h3 class="publication-title">
-            Your ICLR Paper Title
-          </h3>
-
-          <p class="publication-authors">
-            <strong>Duy Cao</strong>,
-            Coauthor One,
-            Coauthor Two
-          </p>
-
-          <p class="publication-venue">
-            <em>Under review at ICLR, 2027</em>
-          </p>
-
+          <h3>The Next Step in 3D Generation Post-Training</h3>
+          <p class="authors"><strong>Cao Duy</strong>, Hong-Phuc Lai, Anh Tran, Phong Nguyen</p>
+          <p class="venue"><em>Under review at ICLR, 2027</em></p>
           <div class="publication-links">
-            #Paper</a>
-            #Project</a>
-            #Code</a>
-            #arXiv</a>
+            <a href="#">Paper</a><a href="#">Project</a><a href="#">Code</a>
           </div>
         </div>
       </article>
 
       <article class="publication">
-        assets/paper2.jpg
-
+        <img class="publication-image" src="assets/PixGS.gif" alt="Preview of the second publication">
         <div>
-          <h3 class="publication-title">
-            Your ECCV Paper Title
-          </h3>
-
-          <p class="publication-authors">
-            <strong>Duy Cao</strong>,
-            Coauthor One,
-            Coauthor Two
-          </p>
-
-          <p class="publication-venue">
-            <em>European Conference on Computer Vision, 2026</em>
-          </p>
-
+          <h3>PixGS: Pixel-Space Diffusion for Direct 3D Gaussian Splat Generation</h3>
+          <p class="authors"><strong>Cao Duy</strong>, Phong Nguyen</p>
+          <p class="venue"><em>European Conference on Computer Vision, 2026</em></p>
           <div class="publication-links">
-            #Paper</a>
-            #Project</a>
-            #Code</a>
-            #arXiv</a>
+            <a href="https://arxiv.org/abs/2607.01803">Paper</a><a href="#">Code</a> (Undergoing Qualcomm’s open-source release process.)
           </div>
         </div>
       </article>
     </section>
 
-    <!-- Experience -->
-
     <section id="experience">
       <h2>Experience</h2>
-
-      <div class="timeline-item">
-        <div>
-          <h3>AI Resident</h3>
-          <p><strong>[Organization name]</strong></p>
-          <p class="muted">
-            Research on generative models and 3D content generation.
-          </p>
-        </div>
-
-        <div class="timeline-date">
-          2026–Present
-        </div>
+      <div class="entry">
+        <div><h3>Research Resident</h3><strong>  <a href="https://www.qualcomm.com/research/artificial-intelligence/ai-residency-program" target="_blank" rel="noopener noreferrer">
+        Qualcomm AI Research
+        </a> (formerly <a href="https://www.vinai.io/vinai-residency-program-batch-12-call-for-applications/" target="_blank" rel="noopener noreferrer">
+        VinAI Research
+        </a>)</strong><p>Research on 3D content generation, unified multimodal models for 3D generation and understanding, 3D scene reconstruction, and efficient VLA models. Also implemented edge-device onboarding for PixGS.</p></div>
+        <div class="entry-date">8/2024–Present</div>
       </div>
-
-      <div class="timeline-item">
-        <div>
-          <h3>Research Intern</h3>
-          <p><strong>[Organization or university]</strong></p>
-          <p class="muted">
-            Briefly describe your research project and contributions.
-          </p>
-        </div>
-
-        <div class="timeline-date">
-          2025–2026
-        </div>
+      <div class="entry">
+        <div><h3>AI Engineer</h3><strong><a href="https://www.vinai.io/" target="_blank" rel="noopener noreferrer">
+        VinAI Research
+        </a></strong><p>Worked on face recognition, object detection, city-scale tracking, and model quantization.</p></div>
+        <div class="entry-date">1/2024–8/2024</div>
       </div>
     </section>
 
-    <!-- Education -->
+<section id="education">
+  <h2>Education</h2>
 
-    <section id="education">
-      <h2>Education</h2>
+<div class="entry">
+  <div>
+    <h3>Bachelor of Artificial Intelligence</h3>
+    <strong>FPT University</strong>
 
-      <div class="timeline-item">
-        <div>
-          <h3>[Degree name]</h3>
-          <p><strong>[University name]</strong></p>
-          <p class="muted">
-            Relevant coursework, thesis, distinction, or GPA.
-          </p>
-        </div>
+    <p>
+      <strong>Valedictorian</strong>, 2025 Information Technology graduating class
+      (1,000+ graduates) · GPA: 3.65/4.00
+    </p>
 
-        <div class="timeline-date">
-          2022–2026
-        </div>
-      </div>
-    </section>
+    <p>
+      <strong>Full four-year scholarship recipient</strong>
+    </p>
+  </div>
 
-    <!-- Contact -->
+  <div class="entry-date">2021–2025</div>
+</div>
+</section>
 
-    <section id="contact">
+    <section class="contact" id="contact">
       <h2>Contact</h2>
-
-      <p>
-        The best way to reach me is by email at
-        your-email@example.com
-          your-email@example.com
-        </a>.
-      </p>
+      <p>The best way to reach me is at <a href="mailto:caoduycp03@gmail.com">caoduycp03@gmail.com</a>.</p>
     </section>
-
   </main>
-
-  <footer>
-    <div class="container">
-      © 2026 Duy Cao. Hosted with GitHub Pages.
-    </div>
-  </footer>
 
 </body>
 </html>
