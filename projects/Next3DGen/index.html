@@ -50,7 +50,7 @@
     .eyebrow::before { width: 7px; height: 7px; border-radius: 50%; content: ""; background: currentColor; box-shadow: 0 0 16px currentColor; }
     .section { padding: 132px 0 0; }
     .section-heading { max-width: none; margin-bottom: 46px; }
-    .section-index { display: inline-block; color: var(--acid); font: 500 15px var(--mono); }
+    .section-index { display: inline-block; color: var(--acid); font: 500 clamp(21px, 2.5vw, 31px)/1.12 var(--mono); }
     .section-heading h2 { margin: 16px 0 17px; font: 600 clamp(42px, 6vw, 82px)/.95 var(--display); letter-spacing: -.06em; }
     .section-heading p { max-width: 650px; margin: 0; color: var(--muted); font-size: 17px; }
     .section-rule { height: 1px; margin-top: 116px; background: var(--line); }
@@ -98,10 +98,32 @@
     .method-icon { display: inline-grid; width: 35px; height: 35px; place-items: center; border: 1px solid currentColor; border-radius: 10px; color: var(--acid); font: 500 14px var(--mono); }
     .method-card:nth-child(2) .method-icon { color: var(--cyan); }
     .method-card:nth-child(3) .method-icon { color: var(--orange); }
-    .method-flow { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 7px; margin-top: 55px; }
-    .flow-node { padding: 10px 11px; border: 1px solid var(--line-strong); border-radius: 7px; color: var(--ink); font: 11px var(--mono); background: rgba(0,0,0,.2); }
-    .flow-arrow { align-self: center; color: var(--acid); font: 14px var(--mono); }
+    .reward-venn { position: relative; width: min(100%, 360px); height: 280px; margin: 20px auto 0; }
+    .venn-circle { position: absolute; display: grid; width: 180px; height: 180px; place-items: center; border: 1px solid currentColor; border-radius: 50%; font: 500 12px var(--mono); text-align: center; }
+    .venn-aesthetic { top: 8px; left: 15px; color: var(--acid); background: rgba(50,83,220,.20); }
+    .venn-alignment { top: 8px; right: 15px; color: var(--cyan); background: rgba(92,225,230,.16); }
+    .venn-plausibility { bottom: 0; left: 90px; color: var(--orange); background: rgba(255,155,104,.16); }
+    .reward-visuals { display: flex; align-items: center; gap: 10px; margin-top: 20px; }
+    .reward-viewpoints { flex: 0 0 44%; color: var(--muted); text-align: center; font: 10px/1.35 var(--mono); }
+    .reward-viewpoints img { width: 100%; max-width: 210px; margin: 0 auto 8px; object-fit: contain; }
+    .reward-visuals .reward-venn { flex: 1; width: auto; height: clamp(190px, 20vw, 230px); min-width: 0; margin: 0; }
+    .reward-visuals .venn-circle { width: clamp(110px, 15vw, 145px); height: clamp(110px, 15vw, 145px); font-size: clamp(9px, 1.1vw, 11px); }
+    .reward-visuals .venn-aesthetic { top: 0; left: 0; }
+    .reward-visuals .venn-alignment { top: 0; right: 0; }
+    .reward-visuals .venn-plausibility { bottom: 0; left: 50%; transform: translateX(-50%); }
+    .method-card.image-reward { height: 260px; min-height: 260px; overflow: visible; }
+    .method-card.image-reward p { max-width: calc(100% - 250px); text-align: left; }
+    .reward-pair { position: absolute; top: 50%; right: -80px; z-index: 2; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: 420px; height: 220px; gap: 0; margin: 0; transform: translateY(-50%); }
+    .reward-pair figure { position: static; width: auto; margin: 0; color: var(--muted); text-align: center; font: 9px/1.25 var(--mono); }
+    .reward-pair figure:first-child { position: relative; z-index: 1; transform: translateX(35px); }
+    .reward-pair figure:last-child { position: relative; z-index: 2; transform: translateX(-35px); }
+    .reward-pair img { width: 100%; aspect-ratio: 1; object-fit: cover; border: 0; border-radius: 0; background: transparent; }
+    .reward-pair figcaption { margin-top: -12px; font-size: 11px; }
+    .method-card.rollout-card p { max-width: calc(100% - 250px); text-align: left; }
+    .method-card.rollout-card { overflow: visible; }
+    .rollout-figure { position: absolute; top: 50%; right: -18px; z-index: 2; width: 270px; height: 240px; object-fit: contain; transform: translateY(-50%); }
     .method-footnote { position: absolute; right: 25px; bottom: 25px; left: 25px; color: var(--faint); font: 11px var(--mono); }
+    .method-card.image-reward .method-footnote { right: auto; max-width: calc(100% - 280px); text-align: left; }
 
     .gallery-section { padding-top: 150px; }
     .gallery-shell { padding: 0; }
@@ -142,6 +164,7 @@
 
     .bib-grid { display: grid; grid-template-columns: .75fr 1.25fr; gap: 70px; align-items: start; }
     .bib-grid h3 { margin: 0; font: 500 15px var(--mono); color: var(--acid); }
+    .intro-grid h3.section-index, .bib-grid h3.section-index { font-size: clamp(21px, 2.5vw, 31px); line-height: 1.12; }
     .bib-box { position: relative; padding: 22px; border: 1px solid var(--line); border-radius: 13px; background: #0d0d0d; }
     .bib-box pre { margin: 0; overflow: auto; color: #d7d7d1; font: 12px/1.75 var(--mono); white-space: pre-wrap; }
     .copy-button { position: absolute; top: 13px; right: 13px; padding: 7px 9px; border: 1px solid var(--line-strong); border-radius: 5px; color: var(--muted); background: transparent; cursor: pointer; font: 10px var(--mono); }
@@ -156,6 +179,8 @@
     @media (max-width: 900px) {
       .intro-grid, .method-layout, .bib-grid { grid-template-columns: 1fr; gap: 35px; }
       .method-card.large { min-height: 370px; }
+      .method-card.image-reward { height: auto; min-height: 260px; overflow: visible; padding-bottom: 26px; }
+      .method-card.image-reward p { max-width: calc(100% - 250px); text-align: left; }
       .metrics-wrap { grid-template-columns: 1fr; }
     }
     @media (max-width: 640px) {
@@ -196,10 +221,10 @@
       <div class="hero-grid">
         <div class="reveal">
           <span class="eyebrow">Reward-based 3D post-training · 2026</span>
-          <h1>The next step in <em>3D generation.</em></h1>
+          <h1>The <em>next</em> step in <em>3D generation.</em></h1>
           <div class="author-line">
             <span>
-              <a href="https://github.com/caoduycp03" target="_blank" rel="noopener noreferrer">Cao Duy</a>,
+              <a href="https://caoduycp03.github.io/" target="_blank" rel="noopener noreferrer">Cao Duy</a>,
               Hong-Phuc Lai,
               <a href="https://scholar.google.com/citations?user=FYZ5ODQAAAAJ" target="_blank" rel="noopener noreferrer">Anh Tran</a>,
               <a href="https://phongnhhn.info/" target="_blank" rel="noopener noreferrer">Phong Nguyen</a>
@@ -220,7 +245,7 @@
         <div class="reveal"><h3 class="section-index">01 / Abstract</h3></div>
         <div class="body-copy reveal">
           <p>Recent large-scale pretrained 3D generators are powerful, yet their outputs are not explicitly optimized for user preferences or downstream tasks. They also face conditioning-specific limitations: text-conditioned models capture broad semantics but often lack fine-grained visual quality, while image-conditioned models preserve visible appearance but may produce implausible unseen regions.</p>
-          <p>We introduce Next3DGen, a unified reward-based post-training framework for text- and image-conditioned 3D generation across single- and multi-stage architectures. Conditioning-specific rewards improve visual quality, condition alignment, and 3D plausibility, preserving reference-image consistency while enhancing unseen regions. For multi-stage generators, tree-structured rollouts jointly optimize geometry and texture through stage-specific credit assignment. Next3DGen consistently improves diverse pretrained generators while remaining training-efficient.</p>
+          <p>We introduce Next3DGen, a unified reward-based post-training framework for text- and image-conditioned 3D generation across single- and multi-stage architectures. It uses conditioning-specific reward pipelines to improve visual quality, condition alignment, and 3D plausibility. For image-to-3D generation, complementary rewards preserve alignment with the reference image while improving unseen regions. For multi-stage generators, tree-structured rollouts jointly optimize geometry and texture through stage-specific credit assignment. Next3DGen consistently improves diverse pretrained generators while remaining training-efficient.</p>
         </div>
       </div>
     </section>
@@ -228,9 +253,9 @@
     <section class="section page-width" id="method">
       <div class="section-heading reveal"><span class="section-index">02 / Method</span><h2>Reward-based post-training.</h2><p>Next3DGen uses conditioning-specific reward pipelines and finite-difference flow optimization to update pretrained 3D generators.</p></div>
       <div class="method-layout">
-        <article class="method-card large reveal"><span class="method-icon">↗</span><h3>Text-to-3D reward</h3><p>Aesthetic, alignment, and plausibility signals work together across 12 icosahedral views. Max aggregation rewards the best evidence for an object instead of encouraging view-specific artifacts.</p><div class="method-flow"><span class="flow-node">prompt</span><span class="flow-arrow">→</span><span class="flow-node">3D asset</span><span class="flow-arrow">→</span><span class="flow-node">12 views</span><span class="flow-arrow">→</span><span class="flow-node">reward</span></div><div class="method-footnote">Aesthetic + alignment + 3D plausibility</div></article>
-        <article class="method-card reveal"><span class="method-icon">◎</span><h3>Image-to-3D reward</h3><p>Reference-aligned similarity protects the input image; antipodal aesthetic and plausibility rewards refine the unseen side.</p><div class="method-footnote">Reference view ≠ antipodal view</div></article>
-        <article class="method-card reveal"><span class="method-icon">⌘</span><h3>Tree-structured rollouts</h3><p>Sibling texture variants are compared fairly, while their rewards are propagated back to the shared geometry stage.</p><div class="method-footnote">Joint geometry + texture credit assignment</div></article>
+        <article class="method-card large reveal"><span class="method-icon">↗</span><h3>Text-to-3D reward</h3><p>Aesthetic, alignment, and plausibility signals work together across 12 icosahedral views and 3D point-cloud. Max aggregation rewards the best evidence for an object instead of encouraging view-specific artifacts.</p><div class="reward-visuals"><div class="reward-viewpoints"><img src="./assets/icosahedron_views.png" alt="Twelve icosahedral camera viewpoints"><span>12 icosahedral views</span></div><div class="reward-venn" role="img" aria-label="Aesthetic, Alignment, and Plausibility rewards overlap to evaluate text-to-3D quality"><span class="venn-circle venn-aesthetic">Aesthetic</span><span class="venn-circle venn-alignment">Alignment</span><span class="venn-circle venn-plausibility">Plausibility</span></div></div></article>
+        <article class="method-card image-reward reveal"><span class="method-icon">◎</span><h3>Image-to-3D reward</h3><p>Reference-aligned similarity protects input alignment, antipodal aesthetic and plausibility rewards refine the unseen side.</p><div class="reward-pair"><figure><img src="./assets/frontal_view.png" alt="Reference-aligned view"><figcaption>Reference-aligned view</figcaption></figure><figure><img src="./assets/antipodal_view.png" alt="Antipodal view"><figcaption>Antipodal view</figcaption></figure></div><div class="method-footnote">Reference-aligned + Antipodal views together provide full azimuthal coverage of the object with minimal overlap.</div></article>
+        <article class="method-card rollout-card reveal"><span class="method-icon">⌘</span><h3>Tree-structured rollouts</h3><p>Sibling texture variants are compared fairly, while their rewards are propagated back to the shared geometry stage.</p><img class="rollout-figure" src="./assets/multi_stage_adaptation.png" alt="Multi-stage adaptation rollout diagram"><div class="method-footnote">Joint geometry + texture credit assignment</div></article>
       </div>
     </section>
 
@@ -285,10 +310,10 @@
     <section class="section page-width" id="metrics">
       <div class="section-heading reveal"><span class="section-index">04 / Quantitative results</span><h2>Evaluation on held-out generations.</h2><p>Selected numbers from the paper’s held-out generation comparisons. Higher is better for every metric shown.</p></div>
       <div class="metrics-wrap reveal">
-        <article class="metric-card"><header><h3>Text-conditioned</h3><span>CFG on · Table 2</span></header><table><thead><tr><th>Model</th><th>CLIP max</th><th>CLIP mean</th><th>PickScore max</th><th>PickScore mean</th><th>HPSv3++ max</th><th>HPSv3++ mean</th><th>Uni3D</th></tr></thead><tbody><tr><td>TRELLIS</td><td>0.329</td><td>0.305</td><td>21.092</td><td>20.652</td><td>0.802</td><td>0.096</td><td>0.166</td></tr><tr class="highlight"><td>TRELLIS*</td><td>0.333</td><td>0.310</td><td>21.145</td><td>20.734</td><td>1.297</td><td>0.480</td><td>0.171</td></tr><tr><td>TIGON</td><td>0.332</td><td>0.306</td><td>21.165</td><td>20.658</td><td>0.581</td><td>-0.118</td><td>0.177</td></tr><tr class="highlight"><td>TIGON*</td><td>0.342</td><td>0.318</td><td>21.379</td><td>20.949</td><td>2.476</td><td>1.400</td><td>0.183</td></tr></tbody></table></article>
-        <article class="metric-card"><header><h3>Image-conditioned</h3><span>CFG on · Table 3</span></header><table><thead><tr><th>Model</th><th>CLIP</th><th>DreamSim</th><th>DINOv3</th><th>HPSv3++ AV</th><th>Uni3D</th></tr></thead><tbody><tr><td>TRELLIS</td><td>0.897</td><td>0.894</td><td>0.898</td><td>1.009</td><td>0.256</td></tr><tr class="highlight"><td>TRELLIS*</td><td>0.901</td><td>0.901</td><td>0.904</td><td>1.213</td><td>0.256</td></tr><tr><td>TIGON</td><td>0.905</td><td>0.899</td><td>0.906</td><td>1.082</td><td>0.249</td></tr><tr class="highlight"><td>TIGON*</td><td>0.914</td><td>0.908</td><td>0.914</td><td>1.529</td><td>0.264</td></tr><tr><td>TripoSplat</td><td>0.919</td><td>0.923</td><td>0.925</td><td>0.843</td><td>0.224</td></tr><tr class="highlight"><td>TripoSplat*</td><td>0.929</td><td>0.938</td><td>0.938</td><td>1.667</td><td>0.234</td></tr></tbody></table></article>
+        <article class="metric-card"><header><h3>Text-conditioned</h3><span>CFG off · Table 2</span></header><table><thead><tr><th>Model</th><th>CLIP max</th><th>CLIP mean</th><th>PickScore max</th><th>PickScore mean</th><th>HPSv3++ max</th><th>HPSv3++ mean</th><th>Uni3D</th></tr></thead><tbody><tr><td>TRELLIS</td><td>0.271</td><td>0.238</td><td>20.072</td><td>19.604</td><td>-0.607</td><td>-0.851</td><td>0.146</td></tr><tr class="highlight"><td>TRELLIS*</td><td>0.300</td><td>0.276</td><td>20.707</td><td>20.306</td><td>0.989</td><td>0.212</td><td>0.166</td></tr><tr><td>TIGON</td><td>0.315</td><td>0.287</td><td>20.788</td><td>20.299</td><td>-0.119</td><td>-0.543</td><td>0.162</td></tr><tr class="highlight"><td>TIGON*</td><td>0.331</td><td>0.309</td><td>21.217</td><td>20.816</td><td>2.278</td><td>1.219</td><td>0.178</td></tr></tbody></table></article>
+        <article class="metric-card"><header><h3>Image-conditioned</h3><span>CFG off · Table 3</span></header><table><thead><tr><th>Model</th><th>CLIP</th><th>DreamSim</th><th>DINOv3</th><th>HPSv3++ AV</th><th>Uni3D</th></tr></thead><tbody><tr><td>TRELLIS</td><td>0.865</td><td>0.855</td><td>0.858</td><td>0.884</td><td>0.250</td></tr><tr class="highlight"><td>TRELLIS*</td><td>0.875</td><td>0.871</td><td>0.876</td><td>1.200</td><td>0.255</td></tr><tr><td>TIGON</td><td>0.871</td><td>0.857</td><td>0.854</td><td>0.790</td><td>0.242</td></tr><tr class="highlight"><td>TIGON*</td><td>0.911</td><td>0.907</td><td>0.910</td><td>1.456</td><td>0.262</td></tr><tr><td>TripoSplat</td><td>0.788</td><td>0.779</td><td>0.752</td><td>-0.213</td><td>0.187</td></tr><tr class="highlight"><td>TripoSplat*</td><td>0.917</td><td>0.923</td><td>0.926</td><td>1.398</td><td>0.225</td></tr></tbody></table></article>
       </div>
-      <p class="metric-note reveal">* Post-trained with Next3DGen. Full metrics, CFG-off results, and ablations are available in the paper.</p>
+      <p class="metric-note reveal">* Post-trained with Next3DGen. Full metrics, CFG-on results, and ablations are available in the paper.</p>
     </section>
 
     <section class="section page-width" id="bibtex">
