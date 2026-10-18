@@ -86,6 +86,7 @@
     .intro-grid { display: grid; grid-template-columns: .7fr 1.3fr; gap: 80px; align-items: start; }
     .intro-grid h3 { margin: 0; font: 500 15px var(--mono); color: var(--acid); }
     .body-copy { max-width: 720px; color: #c5c5c0; font-size: 17px; }
+    .body-copy .accent { color: var(--acid); }
     .body-copy p { margin: 0 0 18px; }
     .body-copy p:last-child { margin-bottom: 0; }
 
@@ -247,7 +248,7 @@
         <div class="reveal"><h3 class="section-index">01 / Abstract</h3></div>
         <div class="body-copy reveal">
           <p>Recent large-scale pretrained 3D generators are powerful, yet their outputs are not explicitly optimized for user preferences or downstream tasks. They also face conditioning-specific limitations: text-conditioned models capture broad semantics but often lack fine-grained visual quality, while image-conditioned models preserve visible appearance but may produce implausible unseen regions.</p>
-          <p>We introduce Next3DGen, a unified reward-based post-training framework for text- and image-conditioned 3D generation across single- and multi-stage architectures. It uses conditioning-specific reward pipelines to improve visual quality, condition alignment, and 3D plausibility. For image-to-3D generation, complementary rewards preserve alignment with the reference image while improving unseen regions. For multi-stage generators, tree-structured rollouts jointly optimize geometry and texture through stage-specific credit assignment. Next3DGen consistently improves diverse pretrained generators while remaining training-efficient.</p>
+          <p>We introduce <span class="accent">Next3DGen</span>, a unified reward-based post-training framework for text- and image-conditioned 3D generation across single- and multi-stage architectures. It uses conditioning-specific reward pipelines to improve visual quality, condition alignment, and 3D plausibility. For image-to-3D generation, complementary rewards preserve alignment with the reference image while improving unseen regions. For multi-stage generators, tree-structured rollouts jointly optimize geometry and texture through stage-specific credit assignment. Next3DGen consistently improves diverse pretrained generators while remaining training-efficient.</p>
         </div>
       </div>
     </section>
@@ -336,13 +337,13 @@
           // TEXT-CONDITIONING · TRELLIS · CFG ON
           on: [
             // Example 1
-            { caption: "Robot with blue head, red chest, and grey-blue arms and legs.", basePath: "./assets/text-placeholder.ksplat", postPath: "./assets/text-placeholder.ksplat" },
+            { caption: "Weathered rectangular structure with flat top, mixed materials, and arched windows.", basePath: "./assets/wearthered_base_cfg.ply", postPath: "./assets/wearthered_cfg.ply" },
             // Example 2
-            { caption: "Robot with blue head, red chest, and grey-blue arms and legs.", basePath: "./assets/text-placeholder.ksplat", postPath: "./assets/text-placeholder.ksplat" },
+            { caption: "White 1960s sports car with a sharp-edged roofline.", basePath: "./assets/white_car_base_cfg.ply", postPath: "./assets/white_car_cfg.ply" },
             // Example 3
-            { caption: "Robot with blue head, red chest, and grey-blue arms and legs.", basePath: "./assets/text-placeholder.ksplat", postPath: "./assets/text-placeholder.ksplat" },
+            { caption: "Character in armor, blue tunic, brown skirt, boots, and with a staff.", basePath: "./assets/blue_armor_base_cfg.ply", postPath: "./assets/blue_armor_cfg.ply" },
             // Example 4
-            { caption: "Robot with blue head, red chest, and grey-blue arms and legs.", basePath: "./assets/text-placeholder.ksplat", postPath: "./assets/text-placeholder.ksplat" }
+            { caption: "Property with buildings, pool, hot tub, court, pathways, and tent.", basePath: "./assets/property_base_cfg.ply", postPath: "./assets/property_cfg.ply" }
           ],
           // TEXT-CONDITIONING · TRELLIS · CFG OFF
           off: [
