@@ -268,15 +268,15 @@
           <div>
             <div class="toolbar-label">Text conditioning / model</div>
             <div class="toolbar-group segmented" data-gallery-controls="text-model" role="group" aria-label="Text model">
-              <button type="button" data-value="TRELLIS" aria-pressed="true">TRELLIS</button>
-              <button type="button" data-value="TIGON" aria-pressed="false">TIGON</button>
+              <button type="button" data-value="TIGON" aria-pressed="true">TIGON</button>
+              <button type="button" data-value="TRELLIS" aria-pressed="false">TRELLIS</button>
             </div>
           </div>
           <div>
             <div class="toolbar-label">Classifier-free guidance</div>
             <div class="toolbar-group segmented" data-gallery-controls="text-cfg" role="group" aria-label="Text CFG">
-              <button type="button" data-value="on" aria-pressed="true">CFG on</button>
-              <button type="button" data-value="off" aria-pressed="false">CFG off</button>
+              <button type="button" data-value="off" aria-pressed="true">CFG off</button>
+              <button type="button" data-value="on" aria-pressed="false">CFG on</button>
             </div>
           </div>
         </div>
@@ -290,16 +290,16 @@
           <div>
             <div class="toolbar-label">Image conditioning / model</div>
             <div class="toolbar-group segmented" data-gallery-controls="image-model" role="group" aria-label="Image model">
-              <button type="button" data-value="TRELLIS" aria-pressed="true">TRELLIS</button>
+              <button type="button" data-value="TripoSplat" aria-pressed="true">TripoSplat</button>
               <button type="button" data-value="TIGON" aria-pressed="false">TIGON</button>
-              <button type="button" data-value="TripoSplat" aria-pressed="false">TripoSplat</button>
+              <button type="button" data-value="TRELLIS" aria-pressed="false">TRELLIS</button>
             </div>
           </div>
           <div>
             <div class="toolbar-label">Classifier-free guidance</div>
             <div class="toolbar-group segmented" data-gallery-controls="image-cfg" role="group" aria-label="Image CFG">
-              <button type="button" data-value="on" aria-pressed="true">CFG on</button>
-              <button type="button" data-value="off" aria-pressed="false">CFG off</button>
+              <button type="button" data-value="off" aria-pressed="true">CFG off</button>
+              <button type="button" data-value="on" aria-pressed="false">CFG on</button>
             </div>
           </div>
         </div>
@@ -359,24 +359,24 @@
           // TEXT-CONDITIONING · TIGON · CFG ON
           on: [
             // Example 1
-            { caption: "Robot with blue head, red chest, and grey-blue arms and legs.", basePath: "./assets/text-placeholder.ply", postPath: "./assets/text-placeholder.ply" },
+            { caption: "Robot with blue head, red chest, and grey-blue arms and legs.", basePath: "./assets/robot_base_cfg.ply", postPath: "./assets/robot_cfg.ply" },
             // Example 2
-            { caption: "Robot with blue head, red chest, and grey-blue arms and legs.", basePath: "./assets/text-placeholder.ply", postPath: "./assets/text-placeholder.ply" },
+            { caption: "Pink peony, yellow stamens, green sepal, veiny texture.", basePath: "./assets/text-placeholder.ply", postPath: "./assets/flower_cfg.ply" },
             // Example 3
-            { caption: "Robot with blue head, red chest, and grey-blue arms and legs.", basePath: "./assets/text-placeholder.ply", postPath: "./assets/text-placeholder.ply" },
+            { caption: "Robot with firearm on grass-topped island.", basePath: "./assets/text-placeholder.ply", postPath: "./assets/grass_cfg.ply" },
             // Example 4
-            { caption: "Robot with blue head, red chest, and grey-blue arms and legs.", basePath: "./assets/text-placeholder.ply", postPath: "./assets/text-placeholder.ply" }
+            { caption: "Apartment with living space, bathroom, kitchen, and balcony.", basePath: "./assets/text-placeholder.ply", postPath: "./assets/apartment_cfg.ply" }
           ],
           // TEXT-CONDITIONING · TIGON · CFG OFF
           off: [
             // Example 1
-            { caption: "Robot with blue head, red chest, and grey-blue arms and legs.", basePath: "./assets/text-placeholder.ply", postPath: "./assets/text-placeholder.ply" },
+            { caption: "Robot with blue head, red chest, and grey-blue arms and legs.", basePath: "./assets/robot_base_nocfg.ply", postPath: "./assets/robot_nocfg.ply" },
             // Example 2
-            { caption: "Robot with blue head, red chest, and grey-blue arms and legs.", basePath: "./assets/text-placeholder.ply", postPath: "./assets/text-placeholder.ply" },
+            { caption: "Marble bust with cloth draping, off-white.", basePath: "./assets/marble_base_nocfg.ply", postPath: "./assets/marble_nocfg.ply" },
             // Example 3
-            { caption: "Robot with blue head, red chest, and grey-blue arms and legs.", basePath: "./assets/text-placeholder.ply", postPath: "./assets/text-placeholder.ply" },
+            { caption: "Soldier figurine with hat, uniform.", basePath: "./assets/soldier_base_nocfg.ply", postPath: "./assets/soldier_nocfg.ply" },
             // Example 4
-            { caption: "Robot with blue head, red chest, and grey-blue arms and legs.", basePath: "./assets/text-placeholder.ply", postPath: "./assets/text-placeholder.ply" }
+            { caption: "Modern house, flat roof, garage, columns, windows, balcony, rooftop, garden.", basePath: "./assets/house_base_nocfg.ply", postPath: "./assets/house_nocfg.ply" }
           ]
         }
       },
@@ -494,7 +494,7 @@
       QUALITATIVE_CASES[kind][model][cfg].forEach((sample) => gallery.appendChild(createCard(kind, sample)));
     }
 
-    const galleryState = { text: { model: "TRELLIS", cfg: "on" }, image: { model: "TRELLIS", cfg: "on" } };
+    const galleryState = { text: { model: "TIGON", cfg: "off" }, image: { model: "TripoSplat", cfg: "off" } };
     ["text", "image"].forEach((kind) => {
       document.querySelectorAll(`[data-gallery-controls^="${kind}-"]`).forEach((group) => {
         group.addEventListener("click", (event) => {
