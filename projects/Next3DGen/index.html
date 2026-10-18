@@ -115,7 +115,7 @@
     .venn-caption { position: absolute; right: 0; bottom: -24px; left: 0; color: var(--muted); font: 11px var(--mono); text-align: center; }
     .method-card.image-reward { height: 260px; min-height: 260px; overflow: visible; }
     .method-card.image-reward p { max-width: calc(100% - 320px); text-align: left; }
-    .reward-pair { position: absolute; top: 50%; right: -80px; z-index: 2; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: 420px; height: 220px; gap: 0; margin: 0; transform: translateY(-50%); }
+    .reward-pair { position: absolute; top: 50%; right: -60px; z-index: 2; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: 420px; height: 220px; gap: 0; margin: 0; transform: translateY(-50%); }
     .reward-pair figure { position: static; width: auto; margin: 0; color: var(--muted); text-align: center; font: 9px/1.25 var(--mono); }
     .reward-pair figure:first-child { position: relative; z-index: 1; transform: translateX(35px); }
     .reward-pair figure:last-child { position: relative; z-index: 2; transform: translateX(-35px); }
@@ -458,22 +458,48 @@
     };
     const viewerModulePromise = import("https://cdn.jsdelivr.net/npm/@mkkellogg/gaussian-splats-3d@0.4.7/build/gaussian-splats-3d.module.js").catch(() => null);
     const viewerInstances = new WeakMap();
-    const viewerObserver = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) { loadViewer(entry.target); viewerObserver.unobserve(entry.target); } }), { rootMargin: "380px 0px" });
+    const viewerLoadQueue = [];
+    const maxConcurrentViewerLoads = 2;
+    let activeViewerLoads = 0;
+    const viewerObserver = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) { viewerObserver.unobserve(entry.target); queueViewerLoad(entry.target); } }), { rootMargin: "80px 0px" });
+
+    function queueViewerLoad(host) {
+      if (host.dataset.loaded === "true" || host.dataset.loading === "true") return;
+      host.dataset.loading = "true";
+      viewerLoadQueue.push(host);
+      drainViewerLoadQueue();
+    }
+
+    function drainViewerLoadQueue() {
+      while (activeViewerLoads < maxConcurrentViewerLoads && viewerLoadQueue.length) {
+        const host = viewerLoadQueue.shift();
+        if (!host.isConnected) { delete host.dataset.loading; continue; }
+        activeViewerLoads += 1;
+        loadViewer(host).finally(() => { activeViewerLoads -= 1; drainViewerLoadQueue(); });
+      }
+    }
 
     async function loadViewer(host) {
       if (host.dataset.loaded === "true") return;
-      host.dataset.loaded = "true";
-      const module = await viewerModulePromise;
-      if (!module) { host.classList.add("is-error"); host.querySelector(".viewer-loading").textContent = "Viewer CDN unavailable"; return; }
       try {
+        const module = await viewerModulePromise;
+        if (!module) { host.classList.add("is-error"); host.querySelector(".viewer-loading").textContent = "Viewer CDN unavailable"; return; }
         const viewer = new module.Viewer({ rootElement: host, cameraUp: [0, -1, 0], initialCameraPosition: [0, 0, 2.4], initialCameraLookAt: [0, 0, 0], ignoreDevicePixelRatio: true, gpuAcceleratedSort: false, sharedMemoryForWorkers: false, useBuiltInControls: true });
         viewerInstances.set(host, viewer);
-        viewer.addSplatScene(host.dataset.splatPath, { progressiveLoad: true, showLoadingUI: false, splatAlphaRemovalThreshold: 5 }).then(() => { viewer.start(); host.classList.add("is-ready"); });
+        await viewer.addSplatScene(host.dataset.splatPath, { progressiveLoad: true, showLoadingUI: false, splatAlphaRemovalThreshold: 5 });
+        host.dataset.loaded = "true";
+        viewer.start();
+        host.classList.add("is-ready");
       } catch (error) { host.classList.add("is-error"); host.querySelector(".viewer-loading").textContent = "Viewer could not load"; }
+      finally { delete host.dataset.loading; }
     }
 
-    function destroyViewers(gallery) {
-      gallery.querySelectorAll("[data-viewer-host]").forEach((host) => { viewerObserver.unobserve(host); const viewer = viewerInstances.get(host); if (viewer) { viewer.dispose(); viewerInstances.delete(host); } });
+    function observeGalleryViewers(gallery) {
+      gallery.querySelectorAll("[data-viewer-host]").forEach((host) => { if (host.dataset.loaded !== "true" && host.dataset.loading !== "true") viewerObserver.observe(host); });
+    }
+
+    function setGalleryViewersRunning(gallery, running) {
+      gallery.querySelectorAll("[data-viewer-host]").forEach((host) => { const viewer = viewerInstances.get(host); if (viewer && host.dataset.loaded === "true") { if (running) viewer.start(); else viewer.stop(); } });
     }
 
     function createCard(kind, sample) {
@@ -484,15 +510,25 @@
         : `<div class="input-condition text">${sample.caption}</div>`;
       const viewerMarkup = (path) => `<div class="viewer-shell"><div class="viewer-host" data-viewer-host data-splat-path="${path}"><div class="viewer-loading">Loading PLY…</div><div class="viewer-tip">drag orbit · wheel zoom</div></div></div>`;
       card.innerHTML = `<div class="comparison-pair"><div>${inputMarkup}</div><div>${viewerMarkup(sample.basePath)}</div><div>${viewerMarkup(sample.postPath)}</div></div>`;
-      card.querySelectorAll("[data-viewer-host]").forEach((host) => viewerObserver.observe(host));
       return card;
     }
 
+    const galleryCache = new Map();
     function makeGallery(kind, model, cfg) {
       const gallery = document.querySelector(`#${kind}-gallery`);
-      destroyViewers(gallery);
-      gallery.innerHTML = "";
-      QUALITATIVE_CASES[kind][model][cfg].forEach((sample) => gallery.appendChild(createCard(kind, sample)));
+      const cacheKey = `${kind}:${model}:${cfg}`;
+      if (gallery.dataset.cacheKey === cacheKey) return;
+      if (gallery.dataset.cacheKey) {
+        setGalleryViewersRunning(gallery, false);
+        galleryCache.set(gallery.dataset.cacheKey, Array.from(gallery.children));
+      }
+      const cachedCards = galleryCache.get(cacheKey);
+      const cards = cachedCards || QUALITATIVE_CASES[kind][model][cfg].map((sample) => createCard(kind, sample));
+      gallery.replaceChildren(...cards);
+      galleryCache.set(cacheKey, cards);
+      gallery.dataset.cacheKey = cacheKey;
+      observeGalleryViewers(gallery);
+      setGalleryViewersRunning(gallery, true);
     }
 
     const galleryState = { text: { model: "TIGON", cfg: "off" }, image: { model: "TripoSplat", cfg: "off" } };
