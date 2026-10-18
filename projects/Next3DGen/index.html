@@ -108,10 +108,11 @@
     .reward-viewpoints img { width: 100%; max-width: 210px; margin: 0 auto 8px; object-fit: contain; }
     .reward-viewpoints span { font-size: 11px; }
     .reward-visuals .reward-venn { flex: 1; width: auto; height: clamp(190px, 20vw, 230px); min-width: 0; margin: 0; }
-    .reward-visuals .venn-circle { width: clamp(110px, 15vw, 145px); height: clamp(110px, 15vw, 145px); font-size: clamp(9px, 1.1vw, 11px); }
+    .reward-visuals .venn-circle { width: clamp(110px, 15vw, 145px); height: clamp(110px, 15vw, 145px); font-size: clamp(11px, 1.3vw, 14px); }
     .reward-visuals .venn-aesthetic { top: 0; left: 0; }
     .reward-visuals .venn-alignment { top: 0; right: 0; }
     .reward-visuals .venn-plausibility { bottom: 0; left: 50%; transform: translateX(-50%); }
+    .venn-caption { position: absolute; right: 0; bottom: -24px; left: 0; color: var(--muted); font: 11px var(--mono); text-align: center; }
     .method-card.image-reward { height: 260px; min-height: 260px; overflow: visible; }
     .method-card.image-reward p { max-width: calc(100% - 320px); text-align: left; }
     .reward-pair { position: absolute; top: 50%; right: -80px; z-index: 2; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: 420px; height: 220px; gap: 0; margin: 0; transform: translateY(-50%); }
@@ -254,7 +255,7 @@
     <section class="section page-width" id="method">
       <div class="section-heading reveal"><span class="section-index">02 / Method</span><h2>Reward-based post-training.</h2><p>Next3DGen uses conditioning-specific reward pipelines and finite-difference flow optimization to update pretrained 3D generators.</p></div>
       <div class="method-layout">
-        <article class="method-card large reveal"><span class="method-icon">↗</span><h3>Text-to-3D reward</h3><p>Aesthetic, alignment, and plausibility signals work together across 12 icosahedral views and 3D point-cloud. Max aggregation rewards the best evidence for an object instead of encouraging view-specific artifacts.</p><div class="reward-visuals"><div class="reward-viewpoints"><img src="./assets/icosahedron_views.png" alt="Twelve icosahedral camera viewpoints"><span>12 icosahedral views</span></div><div class="reward-venn" role="img" aria-label="Aesthetic, Alignment, and Plausibility rewards overlap to evaluate text-to-3D quality"><span class="venn-circle venn-aesthetic">Aesthetic</span><span class="venn-circle venn-alignment">Alignment</span><span class="venn-circle venn-plausibility">Plausibility</span></div></div></article>
+        <article class="method-card large reveal"><span class="method-icon">↗</span><h3>Text-to-3D reward</h3><p>Aesthetic, alignment, and plausibility signals work together across 12 icosahedral views and 3D point-cloud. Max aggregation rewards the best evidence for an object instead of encouraging view-specific artifacts.</p><div class="reward-visuals"><div class="reward-viewpoints"><img src="./assets/icosahedron_views.png" alt="Twelve icosahedral camera viewpoints"><span>12 icosahedral views</span></div><div class="reward-venn" role="img" aria-label="Aesthetic, Alignment, and Plausibility rewards overlap to evaluate text-to-3D quality"><span class="venn-circle venn-aesthetic">Aesthetic</span><span class="venn-circle venn-alignment">Alignment</span><span class="venn-circle venn-plausibility">Plausibility</span><span class="venn-caption">Complementary 3D Rewards</span></div></div></article>
         <article class="method-card image-reward reveal"><span class="method-icon">◎</span><h3>Image-to-3D reward</h3><p>Reference-aligned similarity protects input alignment, antipodal aesthetic and plausibility rewards refine the unseen side.</p><div class="reward-pair"><figure><img src="./assets/frontal_view.png" alt="Reference-aligned view"><figcaption>Reference-aligned view</figcaption></figure><figure><img src="./assets/antipodal_view.png" alt="Antipodal view"><figcaption>Antipodal view</figcaption></figure></div><div class="method-footnote">Reference-aligned + Antipodal views together provide full azimuthal coverage of the object with minimal overlap.</div></article>
         <article class="method-card rollout-card reveal"><span class="method-icon">⌘</span><h3>Tree-structured rollouts</h3><p>Sibling texture variants are compared fairly, while their rewards are propagated back to the shared geometry stage.</p><img class="rollout-figure" src="./assets/multi_stage_adaptation.png" alt="Multi-stage adaptation rollout diagram"><div class="method-footnote">Joint geometry + texture credit assignment</div></article>
       </div>
@@ -361,11 +362,11 @@
             // Example 1
             { caption: "Robot with blue head, red chest, and grey-blue arms and legs.", basePath: "./assets/robot_base_cfg.ply", postPath: "./assets/robot_cfg.ply" },
             // Example 2
-            { caption: "Pink peony, yellow stamens, green sepal, veiny texture.", basePath: "./assets/text-placeholder.ply", postPath: "./assets/flower_cfg.ply" },
+            { caption: "Pink peony, yellow stamens, green sepal, veiny texture.", basePath: "./assets/flower_base_cfg.ply", postPath: "./assets/flower_cfg.ply" },
             // Example 3
-            { caption: "Robot with firearm on grass-topped island.", basePath: "./assets/text-placeholder.ply", postPath: "./assets/grass_cfg.ply" },
+            { caption: "Robot with firearm on grass-topped island.", basePath: "./assets/grass_base_cfg.ply", postPath: "./assets/grass_cfg.ply" },
             // Example 4
-            { caption: "Apartment with living space, bathroom, kitchen, and balcony.", basePath: "./assets/text-placeholder.ply", postPath: "./assets/apartment_cfg.ply" }
+            { caption: "Apartment with living space, bathroom, kitchen, and balcony.", basePath: "./assets/apartment_base_cfg.ply", postPath: "./assets/apartment_cfg.ply" }
           ],
           // TEXT-CONDITIONING · TIGON · CFG OFF
           off: [
@@ -420,13 +421,13 @@
           // IMAGE-CONDITIONING · TIGON · CFG OFF
           off: [
             // Example 1
-            { inputPath: "./assets/image-prompt-placeholder.png", basePath: "./assets/image-placeholder.ply", postPath: "./assets/image-placeholder.ply" },
+            { inputPath: "./assets/flower.png", basePath: "./assets/image-placeholder.ply", postPath: "./assets/image_flower_nocfg.ply" },
             // Example 2
-            { inputPath: "./assets/image-prompt-placeholder.png", basePath: "./assets/image-placeholder.ply", postPath: "./assets/image-placeholder.ply" },
+            { inputPath: "./assets/dog.png", basePath: "./assets/image-placeholder.ply", postPath: "./assets/image_dog_nocfg.ply" },
             // Example 3
-            { inputPath: "./assets/image-prompt-placeholder.png", basePath: "./assets/image-placeholder.ply", postPath: "./assets/image-placeholder.ply" },
+            { inputPath: "./assets/deer.png", basePath: "./assets/image-placeholder.ply", postPath: "./assets/image_deer_nocfg.ply" },
             // Example 4
-            { inputPath: "./assets/image-prompt-placeholder.png", basePath: "./assets/image-placeholder.ply", postPath: "./assets/image-placeholder.ply" }
+            { inputPath: "./assets/cup.png", basePath: "./assets/image-placeholder.ply", postPath: "./assets/image_cup_nocfg.ply" }
           ]
         },
         TripoSplat: {
