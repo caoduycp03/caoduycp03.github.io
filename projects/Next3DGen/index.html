@@ -112,6 +112,7 @@
     .reward-visuals .venn-aesthetic { top: 0; left: 0; }
     .reward-visuals .venn-alignment { top: 0; right: 0; }
     .reward-visuals .venn-plausibility { bottom: 0; left: 50%; transform: translateX(-50%); }
+    .venn-intersection { position: absolute; top: 50%; left: 50%; z-index: 3; width: clamp(32px, 4vw, 48px); height: clamp(32px, 4vw, 48px); border: 2px solid var(--acid); border-radius: 50%; background: rgba(50,83,220,.32); box-shadow: 0 0 0 6px rgba(50,83,220,.12), 0 0 28px rgba(50,83,220,.7); pointer-events: none; transform: translate(-50%, -50%); }
     .venn-caption { position: absolute; right: 0; bottom: -24px; left: 0; color: var(--muted); font: 11px var(--mono); text-align: center; }
     .method-card.image-reward { height: 260px; min-height: 260px; overflow: visible; }
     .method-card.image-reward p { max-width: calc(100% - 320px); text-align: left; }
@@ -255,7 +256,7 @@
     <section class="section page-width" id="method">
       <div class="section-heading reveal"><span class="section-index">02 / Method</span><h2>Reward-based post-training.</h2><p>Next3DGen uses conditioning-specific reward pipelines and finite-difference flow optimization to update pretrained 3D generators.</p></div>
       <div class="method-layout">
-        <article class="method-card large reveal"><span class="method-icon">↗</span><h3>Text-to-3D reward</h3><p>Aesthetic, alignment, and plausibility signals work together across 12 icosahedral views and 3D point-cloud. Max aggregation rewards the best evidence for an object instead of encouraging view-specific artifacts.</p><div class="reward-visuals"><div class="reward-viewpoints"><img src="./assets/icosahedron_views.png" alt="Twelve icosahedral camera viewpoints"><span>12 icosahedral views</span></div><div class="reward-venn" role="img" aria-label="Aesthetic, Alignment, and Plausibility rewards overlap to evaluate text-to-3D quality"><span class="venn-circle venn-aesthetic">Aesthetic</span><span class="venn-circle venn-alignment">Alignment</span><span class="venn-circle venn-plausibility">Plausibility</span><span class="venn-caption">Complementary 3D Rewards</span></div></div></article>
+        <article class="method-card large reveal"><span class="method-icon">↗</span><h3>Text-to-3D reward</h3><p>Aesthetic, alignment, and plausibility signals work together across 12 icosahedral views and 3D point-cloud. Max aggregation rewards the best evidence for an object instead of encouraging view-specific artifacts.</p><div class="reward-visuals"><div class="reward-viewpoints"><img src="./assets/icosahedron_views.png" alt="Twelve icosahedral camera viewpoints"><span>12 icosahedral views</span></div><div class="reward-venn" role="img" aria-label="Aesthetic, Alignment, and Plausibility rewards overlap to evaluate text-to-3D quality"><span class="venn-circle venn-aesthetic">Aesthetic</span><span class="venn-circle venn-alignment">Alignment</span><span class="venn-circle venn-plausibility">Plausibility</span><span class="venn-intersection" aria-hidden="true"></span><span class="venn-caption">Complementary 3D Rewards</span></div></div></article>
         <article class="method-card image-reward reveal"><span class="method-icon">◎</span><h3>Image-to-3D reward</h3><p>Reference-aligned similarity protects input alignment, antipodal aesthetic and plausibility rewards refine the unseen side.</p><div class="reward-pair"><figure><img src="./assets/frontal_view.png" alt="Reference-aligned view"><figcaption>Reference-aligned view</figcaption></figure><figure><img src="./assets/antipodal_view.png" alt="Antipodal view"><figcaption>Antipodal view</figcaption></figure></div><div class="method-footnote">Reference-aligned + Antipodal views together provide full azimuthal coverage of the object with minimal overlap.</div></article>
         <article class="method-card rollout-card reveal"><span class="method-icon">⌘</span><h3>Tree-structured rollouts</h3><p>Sibling texture variants are compared fairly, while their rewards are propagated back to the shared geometry stage.</p><img class="rollout-figure" src="./assets/multi_stage_adaptation.png" alt="Multi-stage adaptation rollout diagram"><div class="method-footnote">Joint geometry + texture credit assignment</div></article>
       </div>
@@ -410,13 +411,13 @@
           // IMAGE-CONDITIONING · TIGON · CFG ON
           on: [
             // Example 1
-            { inputPath: "./assets/image-prompt-placeholder.png", basePath: "./assets/image-placeholder.ply", postPath: "./assets/image-placeholder.ply" },
+            { inputPath: "./assets/horse.png", basePath: "./assets/image-placeholder.ply", postPath: "./assets/image-placeholder.ply" },
             // Example 2
-            { inputPath: "./assets/image-prompt-placeholder.png", basePath: "./assets/image-placeholder.ply", postPath: "./assets/image-placeholder.ply" },
+            { inputPath: "./assets/dragon.png", basePath: "./assets/image-placeholder.ply", postPath: "./assets/image-placeholder.ply" },
             // Example 3
-            { inputPath: "./assets/image-prompt-placeholder.png", basePath: "./assets/image-placeholder.ply", postPath: "./assets/image-placeholder.ply" },
+            { inputPath: "./assets/robot.png", basePath: "./assets/image-placeholder.ply", postPath: "./assets/image-placeholder.ply" },
             // Example 4
-            { inputPath: "./assets/image-prompt-placeholder.png", basePath: "./assets/image-placeholder.ply", postPath: "./assets/image-placeholder.ply" }
+            { inputPath: "./assets/soldier.png", basePath: "./assets/image-placeholder.ply", postPath: "./assets/image-placeholder.ply" }
           ],
           // IMAGE-CONDITIONING · TIGON · CFG OFF
           off: [
